@@ -8,6 +8,6 @@ public class NewBehaviourScript : MonoBehaviour
     
     void respawn()
     {
-
+         
     }
 }
