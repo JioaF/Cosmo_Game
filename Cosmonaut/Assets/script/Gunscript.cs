@@ -1,17 +1,24 @@
 ﻿using UnityEngine;
 // script Refrence : https://www.youtube.com/watch?v=THnivyG0Mvo&t=69s
-// not yet finished 
+// script for The gun Mechanic
 public class Gunscript : MonoBehaviour
 {
-    public float damage = 1f;
-    public float range = 100f;
-
     public Camera fpsCam;
+    public ParticleSystem MuzzleFlash;
+    public GameObject impactEffect;
+
+    public int damage = 1;
+    public float range = 100f;
+  /*public float impactForce = 30f;*/
+    public float fireRate = 3f;
+
+    private float nextTimeToFire = 0f;
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButton("Fire1") && Time.time >= nextTimeToFire)
         {
+            nextTimeToFire = Time.time + 1 / fireRate;
             Shoot();
         }
     }
@@ -19,7 +26,8 @@ public class Gunscript : MonoBehaviour
     void Shoot()
     {
         RaycastHit hit;
-
+        MuzzleFlash.Play();
+        
         if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
         {
             Debug.Log(hit.transform.name);
@@ -28,6 +36,14 @@ public class Gunscript : MonoBehaviour
             {
                 target.TakeDamage(damage);
             }
+
+            /*if (hit.rigidbody != null)
+            {
+                hit.rigidbody.AddForce(-hit.normal * impactForce);
+            }*/
+
+           GameObject Effect = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
+            Destroy(Effect, 2f);
         }
     }
 }

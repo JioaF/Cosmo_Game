@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
 // script Refrence : https://www.youtube.com/watch?v=THnivyG0Mvo&t=69s
-// not yet finished
+// script for the enemy
 public class Target : MonoBehaviour
 {
-    public float hp = 5f;
+    public int hp = 15;
      
-    public void TakeDamage(float amount)
+    public void TakeDamage(int amount)
     {
-        hp -= amount;
+        Debug.Log(hp -= amount);
         if (hp <= 0)
         {
             Destroyed();
@@ -17,11 +17,5 @@ public class Target : MonoBehaviour
     void Destroyed()
     {
         Destroy(gameObject);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

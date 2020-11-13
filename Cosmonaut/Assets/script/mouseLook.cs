@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
+﻿using UnityEngine;
+//script for mouse movement
 public class mouseLook : MonoBehaviour
 {
     public float mouseSensitivity = 50f;
