@@ -7,20 +7,37 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public Text RockTxt;
+    public Text WinTxt;
 
     private int MoonRocktotal = 30;
-    public int MoonRock = 0;
+    private int MoonRock = 0;
+
+    public void setMoonRock()
+    {
+        MoonRock += 1;
+    }
 
     void Update()
     {
-        RockTxt.text = MoonRock.ToString("0");   
+        RockTxt.text = "Rock : " + MoonRock.ToString() + "/" + MoonRocktotal.ToString();
     }
 
-    void WinCondition()
+    void insertTxt(Text txt, string text = "")
+    {
+        txt.text = text;
+    }
+
+    //experimental
+    public void WinCondition()
     {
         if (MoonRock == MoonRocktotal)
         {
-
+           insertTxt(WinTxt, "You win");
+        }
+        else if(MoonRock <= 10)
+        {
+            insertTxt(WinTxt, "You need atleast 10 rock or more to proceed");
+            
         }
     }
     void Respawn()

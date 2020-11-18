@@ -3,23 +3,29 @@
 public class Interact : MonoBehaviour
 {
     public Camera fpsCam;
+
     public float PickupRange = 3f;
 
     public void Start()
     {
-       GameObject.Find("MoonRock");
-       GameObject.Find("Rock");
-      
+        if (GameObject.Find("Rock") && GameObject.Find("Rocket"))
+        {
+            Debug.Log("Object are in");
+        }
+        else
+        {
+            Debug.Log("Object arent in");
+        }
     }
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            PickupItem();
+            InteractObj();
         }
     }
 
-    void PickupItem ()
+    void InteractObj ()
     {
         GameManager gm = FindObjectOfType<GameManager>();
         RaycastHit hitObj;
@@ -27,12 +33,24 @@ public class Interact : MonoBehaviour
         {
             
             Debug.Log(hitObj.transform.name);
+            
             if (hitObj.transform.name == "Rock")
             {
-                /*GameObject Rock = GameObject.Find("MoonRock");
-                gm.MoonRock += 1;
-                Destroy(Rock,2f);
-                Debug.Log("Rock : " + gm.MoonRock);*/
+                
+            }
+            switch (hitObj.transform.name)
+            {
+                case "Rock":
+                        gm.setMoonRock();
+                        Destroy(hitObj.transform.gameObject);
+                    break;
+
+                case "Rocket":
+                    gm.WinCondition();
+                    break;
+
+                default:
+                    break;
             }
         }
      
