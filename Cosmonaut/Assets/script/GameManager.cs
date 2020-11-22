@@ -8,9 +8,24 @@ public class GameManager : MonoBehaviour
 {
     public Text RockTxt;
     public Text WinTxt;
+    public GameObject Go;
+    public GameObject Gc;
+    public GameObject player;
 
     private int MoonRocktotal = 30;
     private int MoonRock = 0;
+
+    private void Start()
+    {
+        Go.SetActive(true);
+    }
+
+    public void ContinueBtn()
+    {
+        Gc.SetActive(true);
+        Go.SetActive(false);
+        player.SetActive(true);
+    }
 
     public void setMoonRock()
     {
