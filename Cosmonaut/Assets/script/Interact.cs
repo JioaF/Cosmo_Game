@@ -33,16 +33,17 @@ public class Interact : MonoBehaviour
         {
             
             Debug.Log(hitObj.transform.name);
-            
-            if (hitObj.transform.name == "Rock")
+
+            /* if (hitObj.transform.name == "Rock")
+             {
+                 gm.setMoonRock();
+                 Destroy(hitObj.transform.gameObject);
+             }*/
+            switch (hitObj.transform.tag)
             {
-                
-            }
-            switch (hitObj.transform.name)
-            {
-                case "Rock":
-                        gm.setMoonRock();
-                        Destroy(hitObj.transform.gameObject);
+                case "collectible":
+                    gm.setMoonRock();
+                    Destroy(hitObj.transform.gameObject);
                     break;
 
                 case "Rocket":
