@@ -1,32 +1,41 @@
 ﻿using UnityEngine;
+using UnityEngine.AI;
 // script Refrence : https://www.youtube.com/watch?v=THnivyG0Mvo&t=69s
 // script for the enemy
 public class Target : MonoBehaviour
 {
     public GameObject spawner;
     public GameObject mob;
+    public NavMeshAgent agent;
 
-    public int hp = 15;
-     
-    public void TakeDamage(int amount)
-    {
-        Debug.Log(hp -= amount);
-        if (hp <= 0)
-        {
-            Destroyed();
-        }
+    private GameManager gm;
+
+    public int hp = 7;
+
+    private void Start() {
+        gm = FindObjectOfType<GameManager>();
     }
 
-    void Destroyed()
+    public void TakeDamage(int amount)
     {
-        Destroy(gameObject);
-        Invoke(nameof(Respawn), 10f);
-
+        hp -= amount;
+        if (hp <= 0)
+        {
+            FindObjectOfType<audioManager>().Stop("EnemyAppear");
+            gm.mob.SetActive(false);
+            Invoke(nameof(Respawn), 10f);
+        }
     }
 
     void Respawn()
     {
         Debug.Log("Respawn");
+        gm.mob.SetActive(true);
+        hp = 7;
         mob.transform.position = spawner.transform.position;
+        FindObjectOfType<audioManager>().Play("EnemyAppear");
+
+        agent.speed += 5f;
+        agent.acceleration += 10f;
     }
 }

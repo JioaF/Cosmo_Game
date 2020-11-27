@@ -6,11 +6,12 @@ public class Gunscript : MonoBehaviour
     public Camera fpsCam;
     public ParticleSystem MuzzleFlash;
     public GameObject impactEffect;
+    public Light lightFlash;
 
     public int damage = 1;
-    public float range = 100f;
+    public float range = 120f;
   /*public float impactForce = 30f;*/
-    public float fireRate = 3f;
+    public float fireRate = 7f;
 
     private float nextTimeToFire = 0f;
     // Update is called once per frame
@@ -19,14 +20,23 @@ public class Gunscript : MonoBehaviour
         if (Input.GetButton("Fire1") && Time.time >= nextTimeToFire)
         {
             nextTimeToFire = Time.time + 1 / fireRate;
+          
             Shoot();
+           
+        }
+        else
+        {
+            lightFlash.enabled = false;
         }
     }
 
     void Shoot()
     {
+        //FindObjectOfType<audioManager>().Play("Firing");
         RaycastHit hit;
         MuzzleFlash.Play();
+        
+        lightFlash.enabled = true;
         
         if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
         {
@@ -43,7 +53,8 @@ public class Gunscript : MonoBehaviour
             }*/
 
            GameObject Effect = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
-            Destroy(Effect, 2f);
+            Destroy(Effect, 1.5f);
+            
         }
     }
 }

@@ -1,13 +1,16 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 //script for interacting with the item
 public class Interact : MonoBehaviour
 {
     public Camera fpsCam;
 
     public float PickupRange = 3f;
+    private GameManager gm;
 
     public void Start()
     {
+        gm = FindObjectOfType<GameManager>();
         if (GameObject.Find("Rock") && GameObject.Find("Rocket"))
         {
             Debug.Log("Object are in");
@@ -22,12 +25,13 @@ public class Interact : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E))
         {
             InteractObj();
+            
         }
     }
 
     void InteractObj ()
     {
-        GameManager gm = FindObjectOfType<GameManager>();
+       
         RaycastHit hitObj;
         if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hitObj, PickupRange))
         {
