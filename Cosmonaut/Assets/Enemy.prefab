@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: 4897456870472112403}
   - component: {fileID: 4897456870472112402}
   m_Layer: 0
-  m_Name: Enemy 1
+  m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -151,6 +151,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawner: {fileID: 0}
   mob: {fileID: 0}
+  agent: {fileID: 0}
   hp: 5
 --- !u!114 &6434431622307312156
 MonoBehaviour:

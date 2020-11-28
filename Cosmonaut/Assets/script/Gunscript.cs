@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Audio;
 // script Refrence : https://www.youtube.com/watch?v=THnivyG0Mvo&t=69s
 // script for The gun Mechanic
 public class Gunscript : MonoBehaviour
@@ -7,6 +8,7 @@ public class Gunscript : MonoBehaviour
     public ParticleSystem MuzzleFlash;
     public GameObject impactEffect;
     public Light lightFlash;
+    public AudioSource au;
 
     public int damage = 1;
     public float range = 120f;
@@ -40,6 +42,7 @@ public class Gunscript : MonoBehaviour
         
         if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
         {
+            au.PlayOneShot(au.clip);
             Debug.Log(hit.transform.name);
             Target target = hit.transform.GetComponent<Target>();
             if (target != null)

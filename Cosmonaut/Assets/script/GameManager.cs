@@ -3,14 +3,13 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 /*
-TODO: 
-simulate the win condition
-OR create pause menu;
+TODO: find another Rock model
  */
 public class GameManager : MonoBehaviour
 {
     public Text RockTxt;
     public Text WinTxt;
+    public Text TimerWin;
     public GameObject Go;//gameobjective 
     public GameObject Gover;//gameover
     public GameObject Gc;//gamecomponent
@@ -25,13 +24,12 @@ public class GameManager : MonoBehaviour
     public AudioClip hover;
 
     private int MoonRocktotal = 10;
-    private int MoonRock = 0;
+    private int MoonRock = 10;
     private bool isPause = false;
     private bool isWin = false;
-
     private void Start()
     {
-        
+     
     }
 
     //button section
@@ -43,6 +41,7 @@ public class GameManager : MonoBehaviour
         Invoke(nameof(spawn), 10f);
         //uiSound.enabled = false;
         Camera.SetActive(true);
+        FindObjectOfType<timer>().TimerStart();
     }
 
     public void clickSound()
@@ -60,7 +59,8 @@ public class GameManager : MonoBehaviour
     }
     public void ExitBtn()
     {
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+        Time.timeScale = 1;
     }
     //end of button section
 
@@ -82,11 +82,14 @@ public class GameManager : MonoBehaviour
             
             resumeGame();
         }
+        
 
     }
+    
 
     public void pauseGame()
     {
+      
         FindObjectOfType<audioManager>().Pause(true);
         isPause = true;
         Cursor.lockState = CursorLockMode.None;
@@ -97,8 +100,9 @@ public class GameManager : MonoBehaviour
     public void exitPausebtn()
     {
         isPause = false;
+        FindObjectOfType<audioManager>().Pause(isPause);
         Time.timeScale = 1;
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
     }
 
     public void resumeGame()
@@ -138,7 +142,9 @@ public class GameManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Camera.SetActive(false);
         Gc.SetActive(false);
-        
+        Time.timeScale = 0;
+        string s = FindObjectOfType<timer>().timetxt;
+        TimerWin.text = "TIME : " + s;
     }
     void Respawn()
     {

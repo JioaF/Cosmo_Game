@@ -1,23 +1,22 @@
 ﻿using UnityEngine.AI;
 using UnityEngine.Audio;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class bot : MonoBehaviour
 {
+    public Text Timetext;
     public NavMeshAgent agent;
     public Transform player;
     private GameManager GM;
+    private timer timer;
     
 
     void Start()
     {
         GM = FindObjectOfType<GameManager>();
+        timer = FindObjectOfType<timer>();
         FindObjectOfType<audioManager>().Play("EnemyAppear");
-    }
-
-    private void Awake()
-    {
-       
     }
 
     // Update is called once per frame
@@ -32,12 +31,13 @@ public class bot : MonoBehaviour
         {
            FindObjectOfType<audioManager>().Play("PlayerDead");
             FindObjectOfType<audioManager>().Stop("EnemyAppear");
-           GM.Gover.SetActive(true);
-           GM.player.SetActive(false);
-           GM.Gc.SetActive(false);
-           GM.mob.SetActive(false);
-           Cursor.lockState = CursorLockMode.None;
-
+            GM.player.SetActive(false);
+            GM.Gc.SetActive(false);
+            GM.mob.SetActive(false);
+            GM.Gover.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
+            Timetext.text = "TIME : " + timer.timetxt;
+            
         }
     }
 }

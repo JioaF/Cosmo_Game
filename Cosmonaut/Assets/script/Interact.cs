@@ -47,6 +47,7 @@ public class Interact : MonoBehaviour
             {
                 case "collectible":
                     gm.setMoonRock();
+                    FindObjectOfType<audioManager>().Play("Pickup");
                     Destroy(hitObj.transform.gameObject);
                     break;
 
