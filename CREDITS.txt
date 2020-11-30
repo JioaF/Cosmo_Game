@@ -1,0 +1,16 @@
+all asset used in this project :
+
+Sfx:
+https://opengameart.org/content/eeryhorror-sfx
+https://opengameart.org/content/ui-sound-effects-library
+https://freesound.org/people/dwightsabeast/sounds/395572/
+https://freesound.org/people/SRJA_Gaming/sounds/545207/
+
+Rocket : 
+https://haruen.itch.io/space-collection-voxel
+
+Weapon : 
+https://devassets.com/assets/sci-fi-weapons/
+
+Effect : 
+https://assetstore.unity.com/packages/vfx/particles/war-fx-5669
