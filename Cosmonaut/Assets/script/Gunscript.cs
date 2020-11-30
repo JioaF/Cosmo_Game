@@ -36,13 +36,12 @@ public class Gunscript : MonoBehaviour
     {
         //FindObjectOfType<audioManager>().Play("Firing");
         RaycastHit hit;
-        MuzzleFlash.Play();
-        
-        lightFlash.enabled = true;
-        
+     
         if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
         {
             au.PlayOneShot(au.clip);
+            MuzzleFlash.Play();
+            lightFlash.enabled = true;
             Debug.Log(hit.transform.name);
             Target target = hit.transform.GetComponent<Target>();
             if (target != null)

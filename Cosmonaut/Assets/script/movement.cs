@@ -9,7 +9,7 @@ public class movement : MonoBehaviour
 
     public float speed = 12f;
     public float gravity = -1.62f;
-    public float jumpHeight = 6f;
+    public float jumpHeight = 7f;
 
     public float groundDistance = 0.4f;
     public LayerMask groundMask;
@@ -41,6 +41,15 @@ public class movement : MonoBehaviour
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+        }
+
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            speed *= 1.3f;
+        }
+        if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            speed /= 1.3f;
         }
 
         controller.Move(move * speed * Time.deltaTime);

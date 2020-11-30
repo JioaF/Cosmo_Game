@@ -2,14 +2,15 @@
 //script for mouse movement
 public class mouseLook : MonoBehaviour
 {
-    public float mouseSensitivity = 50f;
+    public float mouseSensitivity = 100f;
     public Transform playerBody;
+    
 
     float xRotation = 0f;
     // Start is called before the first frame update
     void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
+       
     }
 
     // Update is called once per frame
@@ -24,4 +25,6 @@ public class mouseLook : MonoBehaviour
         transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
         playerBody.Rotate(Vector3.up * mouseX);
     }
+
+    
 }

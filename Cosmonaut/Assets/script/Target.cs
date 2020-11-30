@@ -35,7 +35,7 @@ public class Target : MonoBehaviour
         mob.transform.position = spawner.transform.position;
         FindObjectOfType<audioManager>().Play("EnemyAppear");
 
-        agent.speed += 5f;
-        agent.acceleration += 10f;
+        agent.speed += 6f;
+        agent.acceleration += 11f;
     }
 }

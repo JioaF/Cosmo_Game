@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
     public AudioClip hover;
 
     private int MoonRocktotal = 10;
-    private int MoonRock = 10;
+    private int MoonRock = 0;
     private bool isPause = false;
     private bool isWin = false;
     private void Start()
@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour
         Go.SetActive(false);
         Gover.SetActive(false);
         Invoke(nameof(spawn), 10f);
-        //uiSound.enabled = false;
+        SetCursor(false);
         Camera.SetActive(true);
         FindObjectOfType<timer>().TimerStart();
     }
@@ -72,7 +72,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        RockTxt.text = "Rock : " + MoonRock.ToString() + "/" + MoonRocktotal.ToString();
+        RockTxt.text = "Stone : " + MoonRock.ToString() + "/" + MoonRocktotal.ToString();
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             pauseGame();
@@ -86,13 +86,25 @@ public class GameManager : MonoBehaviour
 
     }
     
+//cursor func
+public void SetCursor(bool v){
+	if(v){
+	Cursor.visible = v;
+	Cursor.lockState = CursorLockMode.None;
+	}else{
+	Cursor.visible = v;
+	Cursor.lockState = CursorLockMode.Locked;
+	}
+}	
+
 
     public void pauseGame()
     {
       
         FindObjectOfType<audioManager>().Pause(true);
         isPause = true;
-        Cursor.lockState = CursorLockMode.None;
+        //Cursor.lockState = CursorLockMode.None;
+        SetCursor(true);
         Time.timeScale = 0;
         pause.SetActive(isPause);
     }
@@ -109,7 +121,7 @@ public class GameManager : MonoBehaviour
     {
         isPause = false;
         FindObjectOfType<audioManager>().Pause(false);
-        Cursor.lockState = CursorLockMode.Locked;
+        SetCursor(false);
         Time.timeScale = 1;
         pause.SetActive(isPause);
     }
@@ -139,7 +151,7 @@ public class GameManager : MonoBehaviour
         FindObjectOfType<audioManager>().Stop("EnemyAppear");
         FindObjectOfType<audioManager>().Play("Winning");
         WinS.SetActive(isWin);
-        Cursor.lockState = CursorLockMode.None;
+        SetCursor(true);
         Camera.SetActive(false);
         Gc.SetActive(false);
         Time.timeScale = 0;

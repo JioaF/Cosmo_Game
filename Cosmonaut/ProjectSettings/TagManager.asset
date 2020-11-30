@@ -8,6 +8,7 @@ TagManager:
   - collectible
   - Enemy
   - Rocket
+  - cam
   layers:
   - Default
   - TransparentFX

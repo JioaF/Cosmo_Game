@@ -35,7 +35,7 @@ public class bot : MonoBehaviour
             GM.Gc.SetActive(false);
             GM.mob.SetActive(false);
             GM.Gover.SetActive(true);
-            Cursor.lockState = CursorLockMode.None;
+            GM.SetCursor(true);
             Timetext.text = "TIME : " + timer.timetxt;
             
         }
